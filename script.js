@@ -1,37 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var form = document.querySelector("form");
-  var submitButton = document.querySelector('input[type="submit"]');
-  var labels = document.querySelectorAll("label");
+// script.js
 
-  submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    var nameInput = document.getElementById("name");
-    var emailInput = document.getElementById("email");
-    var messageInput = document.getElementById("message");
-    var successMessage = document.createElement("p");
-    var successIcon = document.createElement("span");
+// Function to handle form submission
+function handleSubmit(event) {
+  event.preventDefault(); // Prevent form from submitting
 
-    // Add success class to the form
-    form.classList.add("success");
+  const form = event.target;
+  const section = form.parentNode;
+  const successMessage = document.createElement("p");
+  successMessage.textContent = "Your message was received";
+  successMessage.style.color = "green";
+  const checkmark = document.createElement("span");
+  checkmark.textContent = "✔";
+  checkmark.style.color = "green";
 
-    // Hide the form inputs and labels
-    nameInput.style.display = "none";
-    emailInput.style.display = "none";
-    messageInput.style.display = "none";
+  section.replaceChild(successMessage, form);
+  successMessage.appendChild(checkmark);
+}
 
-    for (var i = 0; i < labels.length; i++) {
-      labels[i].style.display = "none";
-    }
+// Add event listeners to the forms
+const abhiForm = document.getElementById("abhi-form");
+abhiForm.addEventListener("submit", handleSubmit);
 
-    // Hide the submit button
-    submitButton.style.display = "none";
-
-    // Create success message and icon
-    successMessage.textContent = "Your Message was received ✓";
-    successMessage.style.color = "green";
-
-    // Append success message and icon to the form
-    form.parentNode.appendChild(successMessage);
-    form.parentNode.appendChild(successIcon);
-  });
-});
+const alexForm = document.getElementById("alex-form");
+alexForm.addEventListener("submit", handleSubmit);
